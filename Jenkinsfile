@@ -10,7 +10,7 @@ pipeline {
         containerName = "nodetest2"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         GITHUB_URL = "https://github.com/divyabilson/nodejsapp2"
-        S3_BUCKET = 's3://mynodejsapp001'
+        S3_BUCKET = "s3://mynodejsapp001"
         
     }
 
