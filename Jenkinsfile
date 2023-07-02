@@ -26,15 +26,12 @@ pipeline {
             }
             
         }
-        stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '*/main']], 
-                    userRemoteConfigs: [[url: '$GITHUB_URL']]
-                ])
-            }
-        }
+        stage('Checkout source repo') {
+      steps {
+         checkout scm
+      }
+    }
+        
         stage('Build') {
             steps {
                 sh 'git clone $GITHUB_URL'
