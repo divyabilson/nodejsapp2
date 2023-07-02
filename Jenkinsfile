@@ -9,7 +9,7 @@ pipeline {
         imageName = "divyabilson/nodejsapp2-repo:${BUILD_NUMBER}"
         containerName = "nodetest2"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        GITHUB_URL = https://github.com/divyabilson/nodejsapp2
+        GITHUB_URL = "https://github.com/divyabilson/nodejsapp2"
         
     }
 
