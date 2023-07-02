@@ -66,7 +66,7 @@ pipeline {
                     aws s3 cp image${BUILD_NUMBER}.tar s3://${S3_BUCKET}/
                     '''
                     sh '''
-                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'rm -rf image*.tar'
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH $USERNAME@$SERVER_IP 'rm -rf image*.tar'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'export AWS_PROFILE=iamuser && aws s3 sync s3://mynodejsapp001/ .'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'docker rm -f nodejsapp2'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'docker rmi -f $(docker images -q) 2> /dev/null'
