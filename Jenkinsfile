@@ -60,7 +60,7 @@ pipeline {
                     chmod 400 $SSH_KEY_PATH
                     docker save -o image${BUILD_NUMBER}.tar $imageName
                     export AWS_PROFILE=iamuser
-                    aws s3 rm 's3://${S3_BUCKET}/' --recursive
+                    aws s3 rm s3://${S3_BUCKET}/ --recursive
                     aws s3 cp image${BUILD_NUMBER}.tar $S3_BUCKET
                     '''
                     sh '''
