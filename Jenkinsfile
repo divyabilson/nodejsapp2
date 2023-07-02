@@ -9,6 +9,7 @@ pipeline {
         imageName = "divyabilson/nodejsapp2-repo:${BUILD_NUMBER}"
         containerName = "nodetest2"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        GITHUB_URL = https://github.com/divyabilson/nodejsapp2
         
     }
 
@@ -30,13 +31,13 @@ pipeline {
                 checkout([
                     $class: 'GitSCM', 
                     branches: [[name: '*/main']], 
-                    userRemoteConfigs: [[url: 'https://github.com/divyabilson/nodejsapp2/']]
+                    userRemoteConfigs: [[url: '$GITHUB_URL']]
                 ])
             }
         }
         stage('Build') {
             steps {
-                sh 'git clone https://github.com/divyabilson/nodejsapp2'
+                sh 'git clone $GITHUB_URL'
                 sh 'docker system prune -af'
                 sh 'docker build -t $imageName .'
                 sh 'docker stop $containerName || true && docker rm -f $containerName || true'
