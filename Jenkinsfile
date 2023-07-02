@@ -11,6 +11,8 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         GITHUB_URL = "https://github.com/divyabilson/nodejsapp2"
         S3_BUCKET = "mynodejsapp001"
+        SERVER_IP = "54.211.242.156"
+        USERNAME = "ubuntu"
         
     }
 
@@ -65,7 +67,7 @@ pipeline {
                     '''
                     sh '''
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'rm -rf image*.tar'
-                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'export AWS_PROFILE=iamuser && aws s3 sync s3://${S3_BUCKET}/ .'
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'export AWS_PROFILE=iamuser && aws s3 sync s3://mynodejsapp001/ .'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'docker rm -f nodejsapp2'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'docker rmi -f $(docker images -q) 2> /dev/null'
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH ubuntu@54.211.242.156 'sudo docker load -i image*.tar'
